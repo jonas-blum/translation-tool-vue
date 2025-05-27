@@ -79,43 +79,56 @@
             divClassName="row-item-projects-2"
             divClassNameOverride="row-item-projects-2"
             state="default-white"
-            to="/componentu45overviewu45page"
+            to="/bekb/components"
+            :index="0"
           />
           <RowItemProjects
             class="row-item-projects-instance"
             divClassName="row-item-projects-2"
             divClassNameOverride="row-item-projects-2"
             state="default-white"
+            to="/raiffeisen/components"
+            :index="1"
           />
           <RowItemProjects
             class="row-item-projects-instance"
             divClassName="row-item-projects-2"
             divClassNameOverride="row-item-projects-2"
             state="default-white"
+            to="/ubs/components"
+            :index="2"
           />
           <RowItemProjects
             class="row-item-projects-instance"
             divClassName="row-item-projects-2"
             divClassNameOverride="row-item-projects-2"
             state="default-white"
+            to="/postfinance/components"
+            :index="3"
           />
           <RowItemProjects
             class="row-item-projects-instance"
             divClassName="row-item-projects-2"
             divClassNameOverride="row-item-projects-2"
             state="default-white"
+            to="/creditsuisse/components"
+            :index="4"
           />
           <RowItemProjects
             class="row-item-projects-instance"
             divClassName="row-item-projects-2"
             divClassNameOverride="row-item-projects-2"
             state="default-white"
+            to="/migrosbank/components"
+            :index="5"
           />
           <RowItemProjects
             class="row-item-projects-instance"
             divClassName="row-item-projects-2"
             divClassNameOverride="row-item-projects-2"
             state="default-white"
+            to="/valiant/components"
+            :index="6"
           />
         </div>
       </div>

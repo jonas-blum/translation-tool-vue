@@ -1,15 +1,15 @@
 <template>
   <div :class="['row-item-projects', className]" @click="navigateTo" style="cursor: pointer;">
-    <div class="text-wrapper-3">Example Project</div>
+    <div class="text-wrapper-3">{{ projectName }}</div>
     <div class="frame-2">
-      <div :class="['text-wrapper-4', divClassName]">2439782</div>
-      <div :class="['text-wrapper-3', divClassNameOverride]">08.06.2023, 22:42</div>
+      <div :class="['text-wrapper-4', divClassName]">{{ projectId }}</div>
+      <div :class="['text-wrapper-3', divClassNameOverride]">{{ lastUpdated }}</div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, computed } from "vue";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
@@ -35,9 +35,69 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    index: {
+      type: Number,
+      default: 0
+    }
   },
   setup(props) {
     const router = useRouter();
+    
+    // Project data based on route or index
+    const projectData = computed(() => {
+      const projects = [
+        {
+          id: 'BKB-2439782',
+          name: 'BEKB Banking App',
+          lastUpdated: '08.06.2023, 22:42',
+          route: '/bekb/components'
+        },
+        {
+          id: 'RFF-3782941',
+          name: 'Raiffeisen Online Portal',
+          lastUpdated: '12.07.2023, 14:15',
+          route: '/raiffeisen/components'
+        },
+        {
+          id: 'UBS-9283741',
+          name: 'UBS Wealth Management',
+          lastUpdated: '23.05.2023, 09:30',
+          route: '/ubs/components'
+        },
+        {
+          id: 'PFN-4728193',
+          name: 'PostFinance Mobile',
+          lastUpdated: '15.06.2023, 16:22',
+          route: '/postfinance/components'
+        },
+        {
+          id: 'CSI-8273941',
+          name: 'Credit Suisse Invest',
+          lastUpdated: '30.05.2023, 11:45',
+          route: '/creditsuisse/components'
+        },
+        {
+          id: 'MGB-3827491',
+          name: 'Migros Bank E-Banking',
+          lastUpdated: '02.07.2023, 08:10',
+          route: '/migrosbank/components'
+        },
+        {
+          id: 'VLT-7283941',
+          name: 'Valiant Digital Banking',
+          lastUpdated: '19.06.2023, 13:25',
+          route: '/valiant/components'
+        }
+      ];
+      
+      // Find project by route or use index as fallback
+      const project = projects.find(p => p.route === props.to) || projects[props.index % projects.length];
+      return project;
+    });
+    
+    const projectName = computed(() => projectData.value.name);
+    const projectId = computed(() => projectData.value.id);
+    const lastUpdated = computed(() => projectData.value.lastUpdated);
     
     const navigateTo = () => {
       try {
@@ -55,6 +115,9 @@ export default defineComponent({
     };
     
     return {
+      projectName,
+      projectId,
+      lastUpdated,
       navigateTo
     };
   }

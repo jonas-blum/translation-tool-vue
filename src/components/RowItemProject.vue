@@ -1,6 +1,6 @@
 <template>
   <div :class="['row-item-project', className]" @click="navigateTo" style="cursor: pointer;">
-    <div class="text-wrapper-14">Example View</div>
+    <div class="text-wrapper-14">{{ viewName }}</div>
     <InterfaceEssentialDeleteBin1_5
       class="interface-essential-delete-bin-1-15"
       color="#0291E1"
@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import InterfaceEssentialDeleteBin1_5 from "../icons/InterfaceEssentialDeleteBin1_5/InterfaceEssentialDeleteBin1_5.vue";
 
@@ -31,9 +31,57 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    index: {
+      type: Number,
+      default: 0
+    }
   },
   setup(props) {
     const router = useRouter();
+    
+    // View data based on route or index
+    const viewData = computed(() => {
+      const views = [
+        {
+          name: 'Navigation Header',
+          route: '/bekb/components/header'
+        },
+        {
+          name: 'Page Footer',
+          route: '/bekb/components/footer'
+        },
+        {
+          name: 'Login Form',
+          route: '/bekb/components/login'
+        },
+        {
+          name: 'Account Dashboard',
+          route: '/bekb/components/dashboard'
+        },
+        {
+          name: 'Payment Form',
+          route: '/bekb/components/payments'
+        },
+        {
+          name: 'Transfer Screen',
+          route: '/bekb/components/transfers'
+        },
+        {
+          name: 'User Settings',
+          route: '/bekb/components/settings'
+        },
+        {
+          name: 'Account Overview',
+          route: '/bekb/components/accounts'
+        }
+      ];
+      
+      // Find view by route or use index as fallback
+      const view = views.find(v => v.route === props.to) || views[props.index % views.length];
+      return view;
+    });
+    
+    const viewName = computed(() => viewData.value.name);
     
     const navigateTo = () => {
       try {
@@ -53,6 +101,7 @@ export default defineComponent({
     };
     
     return {
+      viewName,
       navigateTo
     };
   }
