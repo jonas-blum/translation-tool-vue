@@ -1,57 +1,40 @@
 <template>
   <div :class="['state-default-wrapper', className]">
-    <div :class="['text-wrapper-17', divClassName]">{{ translationKey }}</div>
+    <div :class="['text-wrapper-17', divClassName]">back</div>
 
     <div class="input-2">
       <div class="field-4">
-        <input 
-          v-model="translations.chDe" 
-          class="inputtext" 
-          placeholder="Enter German translation"
-        />
+        <div class="inputtext">Zurück</div>
       </div>
     </div>
 
     <div class="input-2">
       <div class="field-4">
-        <input 
-          v-model="translations.enGb" 
-          class="inputtext" 
-          placeholder="Enter English translation"
-        />
+        <div class="inputtext">Back</div>
       </div>
     </div>
 
     <div class="input-2">
       <div class="field-4">
-        <input 
-          v-model="translations.frFr" 
-          class="inputtext" 
-          placeholder="Enter French translation"
-        />
+        <div class="inputtext">En arrière</div>
       </div>
     </div>
 
     <div class="input-2">
       <div class="field-4">
-        <input 
-          v-model="translations.ptPt" 
-          class="inputtext" 
-          placeholder="Enter Portuguese translation"
-        />
+        <div class="placeholdertext-2">Enter translation</div>
       </div>
     </div>
 
     <InterfaceEssentialDeleteBin1_5
       class="interface-essential-delete-bin-1-5-instance"
       color="#0291E1"
-      @click="deleteTranslation"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import InterfaceEssentialDeleteBin1_5 from "../icons/InterfaceEssentialDeleteBin1_5/InterfaceEssentialDeleteBin1_5.vue";
 
 export default defineComponent({
@@ -72,52 +55,7 @@ export default defineComponent({
       type: String,
       default: "",
     },
-    index: {
-      type: Number,
-      default: 0
-    }
   },
-  setup(props) {
-    // Generate a translation key based on the component index
-    const translationKey = ref(getTranslationKey(props.index));
-    
-    // Initialize translations with default values based on index
-    const translations = ref({
-      chDe: getDefaultTranslation('de', props.index),
-      enGb: getDefaultTranslation('en', props.index),
-      frFr: getDefaultTranslation('fr', props.index),
-      ptPt: ''  // Empty by default for Portuguese
-    });
-    
-    // Function to generate translation key
-    function getTranslationKey(index: number): string {
-      const keys = ['back', 'next', 'cancel', 'submit'];
-      return keys[index % keys.length];
-    }
-    
-    // Function to get default translations
-    function getDefaultTranslation(lang: string, index: number): string {
-      const translations: Record<string, string[]> = {
-        de: ['Zurück', 'Weiter', 'Abbrechen', 'Einreichen'],
-        en: ['Back', 'Next', 'Cancel', 'Submit'],
-        fr: ['En arrière', 'Suivant', 'Annuler', 'Soumettre']
-      };
-      
-      return translations[lang][index % translations[lang].length];
-    }
-    
-    // Function to handle deletion
-    const deleteTranslation = () => {
-      // In a real app, this would call an API to delete the translation
-      alert(`Translation "${translationKey.value}" would be deleted`);
-    };
-    
-    return {
-      translationKey,
-      translations,
-      deleteTranslation
-    };
-  }
 });
 </script>
 
@@ -169,7 +107,7 @@ export default defineComponent({
   flex: 0 0 auto;
   flex-direction: column;
   gap: 8px;
-  padding: 0;
+  padding: 13px 12px;
   position: relative;
   width: 100%;
 }
@@ -182,17 +120,10 @@ export default defineComponent({
   font-weight: var(--body-CTA-medium-font-weight);
   letter-spacing: var(--body-CTA-medium-letter-spacing);
   line-height: var(--body-CTA-medium-line-height);
-  margin-top: 0;
-  padding: 13px 12px;
+  margin-top: -1.00px;
   position: relative;
-  width: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-}
-
-.state-default-wrapper .inputtext::placeholder {
-  color: var(--jls-coloursnimbus);
+  white-space: nowrap;
+  width: fit-content;
 }
 
 .state-default-wrapper .placeholdertext-2 {
@@ -212,10 +143,5 @@ export default defineComponent({
   height: 24px !important;
   position: relative !important;
   width: 24px !important;
-  cursor: pointer;
-}
-
-.state-default-wrapper .interface-essential-delete-bin-1-5-instance:hover {
-  opacity: 0.8;
 }
 </style>

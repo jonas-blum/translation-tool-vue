@@ -16,7 +16,7 @@
         />
         <div class="frame-17">
           <div class="frame-18">
-            <div class="text-wrapper-15">BEKB</div>
+              <div class="text-wrapper-15">BEKB Banking App</div>
             <DivWrapper
               class="interface-essential-menu-navigation-menu-horizontal"
               divClassName="interface-essential-instance"
@@ -48,7 +48,7 @@
         <div class="frame-17">
           <div class="frame-wrapper">
             <div class="frame-18">
-              <div class="text-wrapper-16">Component Name</div>
+              <div class="text-wrapper-16">Navigation Components</div>
               <DivWrapper
                 class="interface-essential-menu-navigation-menu-horizontal"
                 divClassName="interface-essential-instance"
@@ -104,7 +104,7 @@
         <div class="frame-17">
           <div class="frame-wrapper">
             <div class="frame-18">
-              <div class="text-wrapper-16">Component Name</div>
+              <div class="text-wrapper-16">Form Components</div>
               <DivWrapper
                 class="interface-essential-menu-navigation-menu-horizontal"
                 divClassName="interface-essential-instance"

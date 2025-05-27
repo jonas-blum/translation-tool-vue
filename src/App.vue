@@ -1,12 +1,28 @@
 <template>
-  <router-view />
+  <div class="app-container">
+    <router-view v-if="isRouterReady" />
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 
 export default defineComponent({
-  name: "App"
+  name: "App",
+  setup() {
+    const isRouterReady = ref(false);
+    
+    onMounted(() => {
+      // Set router as ready after component is mounted
+      setTimeout(() => {
+        isRouterReady.value = true;
+      }, 100);
+    });
+    
+    return {
+      isRouterReady
+    };
+  }
 });
 </script>
 
@@ -15,9 +31,15 @@ export default defineComponent({
   font-family: "Gilroy", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  width: 100%;
+}
+
+.app-container {
   display: flex;
   justify-content: center;
   height: 100%;
+  width: 100%;
 }
 
 html, body {

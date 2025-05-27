@@ -27,7 +27,7 @@
             />
           </div>
           <div class="frame-25">
-            <div class="button-5" @click="addNewKey">
+            <div class="button-5">
               <div class="content-5">
                 <InterfaceEssentialRemoveAddAdd6 class="interface-essential-remove-add-add-7" />
                 <button class="button-6">New Key</button>
@@ -66,25 +66,21 @@
             class="row-item-admin-3"
             divClassName="row-item-admin-4"
             state="default"
-            :index="0"
           />
           <StateDefaultWrapper
             class="row-item-admin-3"
             divClassName="row-item-admin-4"
             state="default"
-            :index="1"
           />
           <StateDefaultWrapper
             class="row-item-admin-3"
             divClassName="row-item-admin-4"
             state="default"
-            :index="2"
           />
           <StateDefaultWrapper
             class="row-item-admin-3"
             divClassName="row-item-admin-4"
             state="default"
-            :index="3"
           />
         </div>
       </div>
@@ -140,23 +136,8 @@ export default defineComponent({
     
     const backLink = computed(() => `/${projectId}/components`);
     
-    // Function to add a new translation key
-    const addNewKey = () => {
-      // In a real app, this would open a modal or form to add a new key
-      alert('Add new translation key functionality would be implemented here');
-    };
-    
-    // Function to search in keys
-    const searchInKeys = (event: Event) => {
-      const target = event.target as HTMLInputElement;
-      // In a real app, this would filter the list of keys
-      console.log('Searching for:', target.value);
-    };
-    
     return {
-      backLink,
-      addNewKey,
-      searchInKeys
+      backLink
     };
   }
 });
@@ -272,12 +253,6 @@ export default defineComponent({
   padding: 13px 20px;
   position: relative;
   width: 149px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.detailansicht-wrapper .button-5:hover {
-  background-color: rgba(2, 145, 225, 0.05);
 }
 
 .detailansicht-wrapper .content-5 {
@@ -348,8 +323,8 @@ export default defineComponent({
   width: 100%;
 }
 
-.detailansicht-wrapper .search-input {
-  color: var(--jls-colourseclipse);
+.detailansicht-wrapper .search-something-3 {
+  color: var(--jls-coloursnimbus);
   flex: 1;
   font-family: var(--body-CTA-medium-font-family);
   font-size: var(--body-CTA-medium-font-size);
@@ -359,14 +334,6 @@ export default defineComponent({
   line-height: var(--body-CTA-medium-line-height);
   margin-top: -1.00px;
   position: relative;
-  border: none;
-  outline: none;
-  background: transparent;
-  width: 100%;
-}
-
-.detailansicht-wrapper .search-input::placeholder {
-  color: var(--jls-coloursnimbus);
 }
 
 .detailansicht-wrapper .icon-search-6 {

@@ -43,7 +43,10 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-// Create and mount app
-const app = createApp(App);
-app.use(router);
-app.mount("#app");
+// Wait for DOM to be ready
+document.addEventListener('DOMContentLoaded', () => {
+  // Create and mount app
+  const app = createApp(App);
+  app.use(router);
+  app.mount("#app");
+});
