@@ -101,14 +101,7 @@ export default defineComponent({
     
     const navigateTo = () => {
       try {
-        // Map old routes to new routes
-        let route = props.to;
-        if (props.to === '/componentu45overviewu45page') {
-          route = '/bekb/components';
-        }
-        
-        // Use string path to avoid router issues
-        router.push(route);
+        router.push(projectData.value.route);
       } catch (error) {
         console.error('Navigation error:', error);
       }

@@ -1,40 +1,57 @@
 <template>
   <div :class="['state-default-wrapper', className]">
-    <div :class="['text-wrapper-17', divClassName]">back</div>
+    <div :class="['text-wrapper-17', divClassName]">{{ translationKey }}</div>
 
     <div class="input-2">
       <div class="field-4">
-        <div class="inputtext">Zurück</div>
+        <input 
+          v-model="translations.chDe" 
+          class="inputtext" 
+          :placeholder="getDefaultTranslation('de', index)"
+        />
       </div>
     </div>
 
     <div class="input-2">
       <div class="field-4">
-        <div class="inputtext">Back</div>
+        <input 
+          v-model="translations.enGb" 
+          class="inputtext" 
+          :placeholder="getDefaultTranslation('en', index)"
+        />
       </div>
     </div>
 
     <div class="input-2">
       <div class="field-4">
-        <div class="inputtext">En arrière</div>
+        <input 
+          v-model="translations.frFr" 
+          class="inputtext" 
+          :placeholder="getDefaultTranslation('fr', index)"
+        />
       </div>
     </div>
 
     <div class="input-2">
       <div class="field-4">
-        <div class="placeholdertext-2">Enter translation</div>
+        <input 
+          v-model="translations.ptPt" 
+          class="inputtext" 
+          placeholder="Enter Portuguese translation"
+        />
       </div>
     </div>
 
     <InterfaceEssentialDeleteBin1_5
       class="interface-essential-delete-bin-1-5-instance"
       color="#0291E1"
+      @click="deleteTranslation"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import InterfaceEssentialDeleteBin1_5 from "../icons/InterfaceEssentialDeleteBin1_5/InterfaceEssentialDeleteBin1_5.vue";
 
 export default defineComponent({
@@ -55,7 +72,113 @@ export default defineComponent({
       type: String,
       default: "",
     },
+    index: {
+      type: Number,
+      default: 0
+    }
   },
+  setup(props) {
+    // Generate a translation key based on the component index
+    const translationKey = ref(getTranslationKey(props.index));
+    
+    // Initialize translations with default values based on index
+    const translations = ref({
+      chDe: getDefaultTranslation('de', props.index),
+      enGb: getDefaultTranslation('en', props.index),
+      frFr: getDefaultTranslation('fr', props.index),
+      ptPt: ''  // Empty by default for Portuguese
+    });
+    
+    // Function to generate translation key
+    function getTranslationKey(index: number): string {
+      const keys = [
+        'common.back',
+        'common.next',
+        'common.cancel',
+        'common.submit',
+        'auth.username',
+        'auth.password',
+        'dashboard.welcome',
+        'account.balance',
+        'payment.amount',
+        'transfer.recipient',
+        'investment.portfolio',
+        'profile.settings',
+        'notification.new',
+        'error.notFound'
+      ];
+      return keys[index % keys.length];
+    }
+    
+    // Function to get default translations
+    function getDefaultTranslation(lang: string, index: number): string {
+      const translations: Record<string, string[]> = {
+        de: [
+          'Zurück',
+          'Weiter',
+          'Abbrechen',
+          'Bestätigen',
+          'Benutzername',
+          'Passwort',
+          'Willkommen',
+          'Kontostand',
+          'Betrag',
+          'Empfänger',
+          'Anlageportfolio',
+          'Profileinstellungen',
+          'Neue Benachrichtigung',
+          'Seite nicht gefunden'
+        ],
+        en: [
+          'Back',
+          'Next',
+          'Cancel',
+          'Submit',
+          'Username',
+          'Password',
+          'Welcome',
+          'Account Balance',
+          'Amount',
+          'Recipient',
+          'Investment Portfolio',
+          'Profile Settings',
+          'New Notification',
+          'Page Not Found'
+        ],
+        fr: [
+          'Retour',
+          'Suivant',
+          'Annuler',
+          'Soumettre',
+          'Nom d\'utilisateur',
+          'Mot de passe',
+          'Bienvenue',
+          'Solde du compte',
+          'Montant',
+          'Bénéficiaire',
+          'Portefeuille d\'investissement',
+          'Paramètres du profil',
+          'Nouvelle notification',
+          'Page non trouvée'
+        ]
+      };
+      
+      return translations[lang][index % translations[lang].length];
+    }
+    
+    // Function to handle deletion
+    const deleteTranslation = () => {
+      // In a real app, this would call an API to delete the translation
+      alert(`Translation "${translationKey.value}" would be deleted`);
+    };
+    
+    return {
+      translationKey,
+      translations,
+      deleteTranslation,
+      getDefaultTranslation
+    };
+  }
 });
 </script>
 
@@ -107,7 +230,7 @@ export default defineComponent({
   flex: 0 0 auto;
   flex-direction: column;
   gap: 8px;
-  padding: 13px 12px;
+  padding: 0;
   position: relative;
   width: 100%;
 }
@@ -120,28 +243,27 @@ export default defineComponent({
   font-weight: var(--body-CTA-medium-font-weight);
   letter-spacing: var(--body-CTA-medium-letter-spacing);
   line-height: var(--body-CTA-medium-line-height);
-  margin-top: -1.00px;
+  margin-top: 0;
+  padding: 13px 12px;
   position: relative;
-  white-space: nowrap;
-  width: fit-content;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
 }
 
-.state-default-wrapper .placeholdertext-2 {
-  align-self: stretch;
+.state-default-wrapper .inputtext::placeholder {
   color: var(--jls-coloursnimbus);
-  font-family: var(--body-CTA-medium-font-family);
-  font-size: var(--body-CTA-medium-font-size);
-  font-style: var(--body-CTA-medium-font-style);
-  font-weight: var(--body-CTA-medium-font-weight);
-  letter-spacing: var(--body-CTA-medium-letter-spacing);
-  line-height: var(--body-CTA-medium-line-height);
-  margin-top: -1.00px;
-  position: relative;
 }
 
 .state-default-wrapper .interface-essential-delete-bin-1-5-instance {
   height: 24px !important;
   position: relative !important;
   width: 24px !important;
+  cursor: pointer;
+}
+
+.state-default-wrapper .interface-essential-delete-bin-1-5-instance:hover {
+  opacity: 0.8;
 }
 </style>

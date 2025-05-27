@@ -16,7 +16,7 @@
         />
         <div class="frame-17">
           <div class="frame-18">
-              <div class="text-wrapper-15">BEKB Banking App</div>
+            <div class="text-wrapper-15">{{ projectTitle }}</div>
             <DivWrapper
               class="interface-essential-menu-navigation-menu-horizontal"
               divClassName="interface-essential-instance"
@@ -89,14 +89,17 @@
             class="row-item-project-details"
             state="default-white"
             to="/translationu45overviewu45page"
+            :index="0"
           />
           <RowItemProject
             class="row-item-project-details"
             state="default-white"
+            :index="1"
           />
           <RowItemProject
             class="row-item-project-details"
             state="default-white"
+            :index="2"
           />
         </div>
       </div>
@@ -144,14 +147,17 @@
           <RowItemProject
             class="row-item-project-details"
             state="default-white"
+            :index="3"
           />
           <RowItemProject
             class="row-item-project-details"
             state="default-white"
+            :index="4"
           />
           <RowItemProject
             class="row-item-project-details"
             state="default-white"
+            :index="5"
           />
         </div>
       </div>
@@ -160,7 +166,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, h, computed } from "vue";
+import { useRoute } from "vue-router";
 import ArrowsDiagramsArrowsArrowLeft3 from "../icons/ArrowsDiagramsArrowsArrowLeft3.vue";
 import IconSearch3 from "../icons/IconSearch3.vue";
 import InterfaceEssentialRemoveAddAdd6 from "../icons/InterfaceEssentialRemoveAddAdd6.vue";
@@ -198,6 +205,29 @@ export default defineComponent({
       default: null
     },
   },
+  setup() {
+    const route = useRoute();
+    const projectId = route.params.projectId || 'bekb';
+    
+    // Map project IDs to project titles
+    const projectTitles = {
+      'bekb': 'BEKB Banking App',
+      'raiffeisen': 'Raiffeisen Online Portal',
+      'ubs': 'UBS Wealth Management',
+      'postfinance': 'PostFinance Mobile',
+      'creditsuisse': 'Credit Suisse Invest',
+      'migrosbank': 'Migros Bank E-Banking',
+      'valiant': 'Valiant Digital Banking'
+    };
+    
+    const projectTitle = computed(() => {
+      return projectTitles[projectId as string] || 'Banking Project';
+    });
+    
+    return {
+      projectTitle
+    };
+  }
 });
 </script>
 

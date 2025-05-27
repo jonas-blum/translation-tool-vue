@@ -43,36 +43,36 @@ export default defineComponent({
     const viewData = computed(() => {
       const views = [
         {
-          name: 'Navigation Header',
-          route: '/bekb/components/header'
+          name: 'Main Navigation',
+          route: '/bekb/components/main-navigation'
         },
         {
-          name: 'Page Footer',
-          route: '/bekb/components/footer'
+          name: 'Account Summary',
+          route: '/bekb/components/account-summary'
         },
         {
-          name: 'Login Form',
-          route: '/bekb/components/login'
-        },
-        {
-          name: 'Account Dashboard',
-          route: '/bekb/components/dashboard'
+          name: 'Transaction History',
+          route: '/bekb/components/transaction-history'
         },
         {
           name: 'Payment Form',
-          route: '/bekb/components/payments'
+          route: '/bekb/components/payment-form'
         },
         {
           name: 'Transfer Screen',
-          route: '/bekb/components/transfers'
+          route: '/bekb/components/transfer-screen'
         },
         {
-          name: 'User Settings',
-          route: '/bekb/components/settings'
+          name: 'Investment Portfolio',
+          route: '/bekb/components/investment-portfolio'
         },
         {
-          name: 'Account Overview',
-          route: '/bekb/components/accounts'
+          name: 'User Profile',
+          route: '/bekb/components/user-profile'
+        },
+        {
+          name: 'Notifications Center',
+          route: '/bekb/components/notifications-center'
         }
       ];
       
@@ -85,16 +85,7 @@ export default defineComponent({
     
     const navigateTo = () => {
       try {
-        if (props.to) {
-          // Map old routes to new routes
-          let route = props.to;
-          if (props.to === '/translationu45overviewu45page') {
-            route = '/bekb/components/header';
-          }
-          
-          // Use string path to avoid router issues
-          router.push(route);
-        }
+        router.push(viewData.value.route);
       } catch (error) {
         console.error('Navigation error:', error);
       }
